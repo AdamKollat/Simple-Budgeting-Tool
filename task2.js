@@ -35,3 +35,14 @@ let expense2 = expenses.push(new Expense("Groceries", 300, true));
 let expense3 = expenses.push(new Expense("Fuel", 100, true));
 let expense4 = expenses.push(new Expense("Cinema", 30, false));
 let expense5 = expenses.push(new Expense("Bowling", 25, false));
+
+let incomeHeader = `List of all income:`;
+
+function display(array) {
+    let output = '';
+    for (let i = 0; i < array.length; i++) {
+        output+= `Source: ${array[i].name}, amount: ${array[i].amount}, recurring: ${array[i].recurring}\n`
+    }
+    return output
+}
+
