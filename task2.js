@@ -88,3 +88,19 @@ function listExpenses() {
 }
 
 listExpenses()
+
+function sumOfAllAmounts (array) {
+    let result = 0;
+    for (let i = 0; i < array.length; i++) {
+        result += array[i].amount
+    }
+    return result
+}
+
+let dispIncome = sumOfAllAmounts(income) - sumOfAllAmounts(expenses);
+
+let savings = prompt(`Total disposable income: ${dispIncome}\nHow much of this amount would you like to set aside for savings?`);
+
+let finalAmonut = dispIncome - savings
+
+let finalTotal = alert(`Total disposable income after savings: ${finalAmonut}`)
