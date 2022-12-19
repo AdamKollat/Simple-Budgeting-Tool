@@ -36,9 +36,6 @@ let expense3 = expenses.push(new Expense("Fuel", 100, true));
 let expense4 = expenses.push(new Expense("Cinema", 30, false));
 let expense5 = expenses.push(new Expense("Bowling", 25, false));
 
-let incomeHeader = `List of all income:`;
-let expenseHeader = `List of all expenses:`;
-
 function display(array) {
     let output = '';
     for (let i = 0; i < array.length; i++) {
@@ -48,35 +45,46 @@ function display(array) {
 }
 
 function listIncome() {
-    let incomeQuestion = prompt(`${incomeHeader}\n${display(income)}\nWould you like to add another income? (Y/N)`);
-    while (incomeQuestion === 'Y' || incomeQuestion === 'y') {
-        let name = prompt('Please enter source of income:');
-        let amount = prompt('Please enter amount:');
-        let recurring = prompt('Recurring payment? (Y/N');
-        if (recurring === 'Y' || recurring === 'y') {
-            recurring = true;
-        } else {
-            recurring = false;
+    let incomeQuestion;
+    do {
+        incomeQuestion = prompt(`List of all income:\n${display(income)}\nWould you like to add another income? (Y/N)`);
+        if (incomeQuestion === 'Y' || incomeQuestion === 'y') {
+            let name = prompt('Please enter source of income:');
+            let amount = prompt('Please enter amount:');
+            let recurring = prompt('Recurring payment? (Y/N)');
+            if (recurring === 'Y' || recurring === 'y') {
+                recurring = true;
+            } else {
+                recurring = false;
+            }
+            let newIncomeObject = new Income(name, amount, recurring);
+            income.push(newIncomeObject)
+            sessionStorage.setItem("income", JSON.stringify(income));
         }
-        let newIncomeObjet = new Income(name, amount, recurring);
-        income.push(newIncomeObjet)
-        sessionStorage.setItem("income", JSON.stringify(income));
-        listIncome()
     }
+    while (incomeQuestion === 'Y' || incomeQuestion === 'y')
 }
 
 listIncome()
 
-// if (incomeQuesion === 'Y' || incomeQuesion === 'y') {
-//     let name = prompt('Please enter source of income:');
-//     let amount = prompt('Please enter amount:');
-//     let recurring = prompt('Recurring payment? (Y/N');
-//     if (recurring === 'Y' || recurring === 'y') {
-//         recurring = true;
-//     } else {
-//         recurring = false;
-//     }
-//     let newIncomeObjet = new Income(name, amount, recurring);
-//     income.push(newIncomeObjet)
-//     sessionStorage.setItem("income", JSON.stringify(income));
-// }
+function listExpenses() {
+    let expenseQuestion;
+    do {
+        expenseQuestion = prompt(`List of all expenses:\n${display(expenses)}\nWould you like to add another expense? (Y/N)`);
+        if (expenseQuestion === 'Y' || expenseQuestion === 'y') {
+            let name = prompt('Please enter name of expense:');
+            let amount = prompt('Please enter amount:');
+            let recurring = prompt('Recurring expense? (Y/N)');
+            if (recurring === 'Y' || recurring === 'y') {
+                recurring = true;
+            } else {
+                recurring = false;
+            }
+            let newExpenseObject = new Expense(name, amount, recurring);
+            expenses.push(newExpenseObject);
+            sessionStorage.setItem("expenses", JSON.stringify(expenses));
+        }
+    } while (expenseQuestion === 'Y' || expenseQuestion === 'y')
+}
+
+listExpenses()
